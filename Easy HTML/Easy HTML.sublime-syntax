@@ -1,0 +1,72 @@
+%YAML 1.2
+---
+name: Easy HTML
+scope: source.easy-html
+file_extensions:
+  - ehtml
+  - easy
+
+contexts:
+  main:
+    - match: '(\b[\w\d-]+)'
+      captures:
+        0: keyword.easy-html
+    - match: '(\{)'
+      captures:
+        0: punctuation.easy-html
+      push: 
+        - match: '(\})'
+          pop: true
+          captures:
+            0: punctuation.easy-html
+        - include: main
+        - match: '(.)'
+          captures:
+            0: text.easy-html
+    - match: '(\")'
+      captures:
+        0: punctuation.easy-html
+      push: 
+        - match: '(\")'
+          pop: true
+          captures:
+            0: punctuation.easy-html
+        - match: '(.)'
+          captures:
+            0: text.easy-html
+    - match: '(\'')'
+      captures:
+        0: punctuation.easy-html
+      push: 
+        - match: '(\'')'
+          pop: true
+          captures:
+            0: punctuation.easy-html
+        - match: '(.)'
+          captures:
+            0: text.easy-html
+    - include: multi_line_comment
+    - match: '(//.*)'
+      captures:
+        0: comment.easy-html
+    - match: '([\.\x{007c}\:\x{007c}\!\x{007c}\=\x{007c}\[\x{007c}\]\x{007c}\(\x{007c}\)\x{007c}\*])'
+      captures:
+        0: punctuation.easy-html
+    - match: '(.)'
+      captures:
+        0: text.easy-html
+  multi_line_comment:
+    - match: '(/\*)'
+      captures:
+        0: comment.easy-html
+      push: 
+        - match: '(\*/)'
+          pop: true
+          captures:
+            0: comment.easy-html
+        - match: '(.)'
+          captures:
+            0: comment.easy-html
+    - match: '(.)'
+      captures:
+        0: text.easy-html
