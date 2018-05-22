@@ -10,7 +10,7 @@ contexts:
   main:
     - match: '(\b[\w\d-]+)'
       captures:
-        0: keyword.easy-html
+        0: storage.type.class.easy-html
     - match: '(\{)'
       captures:
         0: punctuation.easy-html
